@@ -40,7 +40,7 @@ resources:
   source:
     uri: ((pipeline-repo))
     private_key: ((plat-auto-pipes-deploy-key.private_key))
-    branch: main
+    branch: master
 
 jobs:
 - name: test
