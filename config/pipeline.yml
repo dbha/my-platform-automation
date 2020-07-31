@@ -80,7 +80,7 @@ jobs:
         CREDHUB_CLIENT: ((credhub-client))
         CREDHUB_SECRET: ((credhub-secret))
         CREDHUB_SERVER: https://credhub.pksdemo.net:8844
-        PREFIX: /concourse/main/prd-pks
+        PREFIX: /concourse/main
       input_mapping:
         files: env
       output_mapping:
