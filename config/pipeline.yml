@@ -85,6 +85,7 @@ jobs:
         files: env
       output_mapping:
         interpolated-files: interpolated-env
+
     - task: export-installation
       image: platform-automation-image
       file: platform-automation-tasks/tasks/export-installation.yml
