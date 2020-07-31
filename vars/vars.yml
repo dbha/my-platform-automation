@@ -1,1 +1,2 @@
-pipeline-repo: git@github.com:dbha/my-platform-automation.git
+#pipeline-repo: git@github.com:dbha/my-platform-automation.git
+pipeline-repo: https://github.com/dbha/my-platform-automation.git
