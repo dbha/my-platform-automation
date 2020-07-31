@@ -1,0 +1,7 @@
+s3_endpoint: https://s3.ap-northeast-2.amazonaws.com
+s3_region: ap-northeast-2
+platform-automation-bucket: dbha-automation-test
+credhub-server: https://concourse.cp.pksdemo.net
+opsman-url: https://opsmgr-02.haas-205.pez.pivotal.io
+
+pipeline-repo: git@github.com:dbha/workspace.git

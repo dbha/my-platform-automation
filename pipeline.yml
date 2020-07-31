@@ -1,0 +1,67 @@
+---
+groups:
+- name: main
+  jobs:
+  - test
+  - export-installation
+
+- name: test
+  jobs:
+  - test
+
+- name: opsman
+  jobs:
+  - export-installation
+
+resources:
+- name: platform-automation
+  type: pivnet
+  source:
+    product_slug: platform-automation
+    api_token: ((pivnet-refresh-token))
+
+- name: env
+  type: git
+  source:
+    uri: ((pipeline-repo))
+    private_key: ((plat-auto-pipes-deploy-key.private_key))
+    branch: main
+
+jobs:
+- name: test
+  plan:
+    - get: platform-automation-image
+      resource: platform-automation
+      params:
+        globs: ["*image*.tgz"]
+        unpack: true
+    - get: platform-automation-tasks
+      resource: platform-automation
+      params:
+        globs: ["*tasks*.zip"]
+        unpack: true
+    - task: test
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/test.yml
+
+- name: export-installation
+  serial: true
+  plan:
+    - get: platform-automation-image
+      resource: platform-automation
+      params:
+        globs: ["*image*.tgz"]
+        unpack: true
+    - get: platform-automation-tasks
+      resource: platform-automation
+      params:
+        globs: ["*tasks*.zip"]
+        unpack: true
+    - get: env
+    - task: export-installation
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/export-installation.yml
+    - put: installation
+      params:
+        file: installation/installation-*.zip
+
